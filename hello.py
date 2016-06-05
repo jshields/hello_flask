@@ -11,6 +11,13 @@ CONFIG_FILE = 'config.json'
 app = Flask(__name__)
 
 
+def _html_file_ext(name):
+    """Suffix a name with the HTML file extension.
+    Uses `.html`, not `.htm`.
+    """
+    return '%(name)s.html' % {'name': name}
+
+
 @app.errorhandler(404)
 def page_not_found(error):
     """404 Not Found custom page"""
@@ -36,23 +43,24 @@ def hello_name(name='Flask'):
 @app.route('/<name>')
 def hello_template(name):
     """templates/ dir is the template root for flask"""
-    filename = '%(name)s.html' % {'name': name}
+    filename = _html_file_ext(name)
     try:
         resp = render_template(filename), 200
     except TemplateNotFound:
-        resp = page_not_found(NotFound)
+        resp = page_not_found(NotFound())
     return resp
 
 
-@app.route('/pathy/<path:filepath>')
-def hello_path():
+@app.route('/<path:filename>')
+def hello_path(filename):
     """
     Serves based on filename.
     Must only serve from the /templates dir as root!
 
     path: like the default but also accepts slashes
     """
-    return render_template(filepath)
+    template = _html_file_ext(filename)
+    return render_template(template)
 
 
 @app.route('/hello_json')
