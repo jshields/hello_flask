@@ -1,0 +1,39 @@
+{% extends 'base/base.html' %}
+{% import 'base/macros.html' as macros %}
+
+{% block javascript %}
+    {{ super() }}
+    <script src="static/js/macro_test.js" type="text/javascript"></script>
+{% endblock javascript %}
+
+{% block header %}
+<header>
+    <h1>Testing Macros!</h1>
+</header>
+{% endblock header %}
+
+{% block content %}
+<main>
+<p>Macro flavor one: heavily controlled
+{{ macros.button_1(*btn_args, **btn_kwargs) }}
+</p>
+
+
+<p>Macro flavor two: lots of control and ability to insert arbitrary values for caller
+{{ macros.button_2(*btn_args, **btn_kwargs) }}
+</p>
+
+
+
+<p id="nested-wrapper">Nested macros:
+{{ macros.button_3(*btn_args, **btn_kwargs) }}
+</p>
+
+</main>
+{% endblock content %}
+
+{% block footer %}
+<footer>
+    I'm the footer.
+</footer>
+{% endblock footer %}

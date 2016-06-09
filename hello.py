@@ -1,10 +1,11 @@
 """
 example flask module
 """
-from flask import Flask, render_template, jsonify  # flask itsdangerous Werkzeug Jinja2 click MarkupSafe
+from flask import Flask, render_template, json, jsonify  # flask itsdangerous Werkzeug Jinja2 click MarkupSafe
 
 from jinja2.exceptions import TemplateNotFound
 from werkzeug.exceptions import NotFound
+
 
 CONFIG_FILE = 'config.json'
 
@@ -81,6 +82,33 @@ def hello_json():
         }
     }
     return jsonify(payload)
+
+
+@app.route('/macrotest')
+def macro_test():
+    """test Jinja macros"""
+    filename = 'macro_test.html'
+
+    # name, label, value
+    btn_args = ['test-name', 'test-label', 'test-value']
+    # order='primary', type='button', icon=None, classes=None, data=None
+    btn_kwargs = {
+        'icon': 'check',
+        'classes': ['fantastic', 'great', 'yes'],
+        'data': {
+            'target': 'Jupiter',
+            # dump to a JavaScript friendly format,
+            # since data attrs are used by JavaScript
+            'dog': json.dumps({"name": "Rover", "age": 5, "canine": True})
+        }
+    }
+
+    kwargs = {
+        'btn_args': btn_args,
+        'btn_kwargs': btn_kwargs
+    }
+
+    return render_template(filename, **kwargs), 200
 
 
 if __name__ == '__main__':

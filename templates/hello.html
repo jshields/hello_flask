@@ -1,32 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Hello {{ name }}!</title>
-    {% block meta %}
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% endblock meta %}
-</head>
-<body>
+{% extends 'base/base.html' %}
 
-    {% block header %}
-    <header>
-        <h1>Hello {{ name }}!</h1>
-    </header>
-    {% endblock header %}
+{% block header %}
+<header>
+    <h1>Hello {{ name }}!</h1>
+</header>
+{% endblock header %}
 
-    {% block content %}
-    <main>
-        I'm the main content.
-    </main>
-    {% endblock content %}
+{% block content %}
+<main>
+    I'm the main content.
+</main>
+{% endblock content %}
 
-    {% block footer %}
-    <footer>
-        I'm the footer.
-    </footer>
-    {% endblock footer %}
-
-</body>
-</html>
+{% block footer %}
+<footer>
+    I'm the footer.
+</footer>
+{% endblock footer %}
