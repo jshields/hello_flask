@@ -17,7 +17,7 @@
 {# Macro flavor two: lots of control and ability to insert arbitrary values for caller #}
 {% macro button_2(name, label, value, order='primary', type='button', icon=None, classes=None, data=None) %}
 {% autoescape false %}
-<button type="{{ type }}" name="{{ name }}" value="{{ value }}" class="btn btn-{{ order }} {{ classes }}" {{ data }}> {# <- not working. TODO "quick and easy" way to add data attrs #}
+<button type="{{ type }}" name="{{ name }}" value="{{ value }}" class="btn btn-{{ order }} {{ classes }}" {{ data }}>
     {%- if icon -%}
         <span class="fa fa-{{ icon }}"></span>&nbsp;
     {%- endif -%}
