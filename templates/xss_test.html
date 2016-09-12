@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<main>
+    {% autoescape true %}
+        <h3>Autoescape is On</h3>
+        <label>Here is something the hypothetical user entered:</label>
+        <div>{{ unsafe_value }}</div>
+    {% endautoescape %}
+    <hr>
+    {% autoescape false %}
+        <h3>Autoescape is Off</h3>
+
+        <label>Here is something the hypothetical user entered:</label>
+        <div>(Will execute script){{ unsafe_value }}</div>
+
+        <label>The escape filter:</label>
+        <div>{{ unsafe_value|escape }}</div>
+
+        <label>The safe filter: (bad usage here)</label>
+        <div>(Will execute script){{ unsafe_value|safe }}</div>
+    {% endautoescape %}
+</main>
+{% endblock content %}
