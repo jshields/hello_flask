@@ -41,27 +41,15 @@ def hello_name(name='Flask'):
     return render_template('hello.html', **kwargs), 200
 
 
-@app.route('/<name>')
-def hello_template(name):
-    """templates/ dir is the template root for flask"""
-    filename = _html_file_ext(name)
-    try:
-        resp = render_template(filename), 200
-    except TemplateNotFound:
-        resp = page_not_found(NotFound())
-    return resp
-
-
-@app.route('/<path:filename>')
-def hello_path(filename):
-    """
-    Serves based on filename.
-    Must only serve from the /templates dir as root!
-
-    path: like the default but also accepts slashes
-    """
-    template = _html_file_ext(filename)
-    return render_template(template)
+#@app.route('/<name>')
+#def hello_template(name):
+#    """templates/ dir is the template root for flask"""
+#    filename = _html_file_ext(name)
+#    try:
+#        resp = render_template(filename), 200
+#    except TemplateNotFound:
+#        resp = page_not_found(NotFound())
+#    return resp
 
 
 @app.route('/hello_json')
@@ -106,6 +94,20 @@ def macro_test():
     kwargs = {
         'btn_args': btn_args,
         'btn_kwargs': btn_kwargs
+    }
+
+    return render_template(filename, **kwargs), 200
+
+
+@app.route('/xsstest')
+def xss_test():
+    """test autoescape"""
+    filename = 'xss_test.html'
+
+    pretend_unsafe_input = "<script>alert('JavaScript executed... Gotcha!')</script>"
+
+    kwargs = {
+        'unsafe_value': pretend_unsafe_input
     }
 
     return render_template(filename, **kwargs), 200
