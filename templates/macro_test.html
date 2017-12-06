@@ -1,15 +1,6 @@
 {% extends 'base/base.html' %}
 {% import 'base/macros.html' as macros %}
 
-{# TODO does not work: https://github.com/pallets/jinja/issues/164 #}
-{#  {% set tab_num = None %}   #}
-{#  {% macro tabber(start_at=1) %}   #}
-{#      {% if not none(tab_num) %}   #}
-{#          {% set tab_num = start_at %}   #}
-{#      {% endif %}    #}
-{#      {{ tab_num }}   #}
-{#      {% set tab_num = tab_num + 1 %}   #}
-{#  {% endmacro %}   #}
 
 
 {% block javascript %}
@@ -26,19 +17,9 @@
 
 {% block content %}
 <main>
-{#    <div>  #}
-{#        <label>testing tabber</label>  #}
-{#        <input type="text" tabindex="{{ tabber() }}" value="1">  #}
-{#        <input type="text" tabindex="{{ tabber() }}" value="2">  #}
-{#        <input type="text" tabindex="{{ tabber() }}" value="3">  #}
-{#        <input type="text" tabindex="{{ tabber() }}" value="4">  #}
-{#        <input type="text" tabindex="5" value="5 (manual)">  #}
-{#        <input type="text" tabindex="{{ tabber(start_at=tab_num+1) }}" value="6 (back on tabber)">  #}
-{#        <input type="text" tabindex="{{ tabber() }}" value="7">  #}
-{#    </div>  #}
 
     <div id="nested-wrapper">Nested macros (data attr helper inside button):
-    {{ macros.button_3(*btn_args, **btn_kwargs) }}
+    {{ macros.button(*btn_args, **btn_kwargs) }}
     </div>
 
 </main>

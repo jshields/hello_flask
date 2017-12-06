@@ -1,34 +1,5 @@
+{# experimenting with macros #}
 
-{# button, type button by default #}
-
-
-{# Macro flavor one: heavily controlled #}
-{% macro button_1(name, label, value, order='primary', type='button', icon=None, classes=None, data=None) %}
-{% autoescape false %}
-<button type="{{ type }}" name="{{ name }}" value="{{ value }}" class="btn btn-{{ order }} {{ classes|join(' ') }}" {% for key, value in data.iteritems() %}{{ "data-%(key)s='%(value)s'" % {'key': key, 'value': value} }}{% endfor %}>
-    {%- if icon -%}
-        <span class="fa fa-{{ icon }}"></span>&nbsp;
-    {%- endif -%}
-    {{ label }}
-</button>
-{% endautoescape %}
-{% endmacro %}
-
-{# Macro flavor two: lots of control and ability to insert arbitrary values for caller #}
-{% macro button_2(name, label, value, order='primary', type='button', icon=None, classes=None, data=None) %}
-{% autoescape false %}
-<button type="{{ type }}" name="{{ name }}" value="{{ value }}" class="btn btn-{{ order }} {{ classes }}" {{ data }}>
-    {%- if icon -%}
-        <span class="fa fa-{{ icon }}"></span>&nbsp;
-    {%- endif -%}
-    {{ label }}
-</button>
-{% endautoescape %}
-{% endmacro %}
-
-
-
-{# nested macro test #}
 {% macro data_attrs(data_dict) -%}
     {% autoescape false %}
     {%- for key, value in data_dict.iteritems() -%}
@@ -37,7 +8,8 @@
     {% endautoescape %}
 {%- endmacro -%}
 
-{% macro button_3(name, label, value, order='primary', type='button', icon=None, classes=None, data=None) %}
+{# button, type button by default #}
+{% macro button(name, label, value, order='primary', type='button', icon=None, classes=None, data=None) %}
 <button type="{{ type }}" name="{{ name }}" value="{{ value }}" class="btn btn-{{ order }} {{ classes|join(' ') }}" {{ data_attrs(data) }}>
     {%- if icon -%}
         <span class="fa fa-{{ icon }}"></span>&nbsp;

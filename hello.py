@@ -28,8 +28,6 @@ def page_not_found(error):
 @app.route("/hello_string")
 def hello_string():
     """flask Hello World"""
-    # 200 OK is assumed but
-    # I state it explicitly
     return "Hello World!", 200
 
 
@@ -59,12 +57,12 @@ def hello_json():
     Response object with application/json
     """
     payload = {
-        'obj_guy': {
+        'thing': {
             'foo': 'cat',
             'bar': 2,
             'baz': True
         },
-        'other_guy': {
+        'other_thing': {
             'banana': False,
             'strength': 5.623
         }
